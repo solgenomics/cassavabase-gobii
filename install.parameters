@@ -1,0 +1,75 @@
+#This parameter file will be used by gobiiconfig_wrapper.sh to generate a proper gobii-web.xml -- the main configuration file of a GOBII instance.
+#Note that you need to specify this file into the *_main.parameters so that the deployment script will pick it up.
+#Also note that all the paths here are on the point of view of the running dockers, mainly the web docker, hence the /data prefix on most of them.
+#The /data directory is the default working directory of all the GOBII dockers, this is also where the application bundle is located. It is a volume mapped to the shared directory visible to all 3 dockers.
+
+#The GOBII application data bundle's path in the context of the docker containers. Keep the default unless otherwise changed in the docker images.
+BUNDLE_PATH="/data/gobii_bundle"
+#The generated gobii-web.xml path. Keep the default unless otherwise changed in the docker images.
+CONFIG_XML="/data/gobii_bundle/config/gobii-web.xml"
+#The authentication type. If you want to be able to login using the test user upon installation, set this to "TEST". If you want to immediately connect to LDAP upon installation, set to "LDAP".
+#We suggest to set it to "TEST" at first, then verify that everything works by logging into the extractor UI. Then manually set it to "LDAP" in the gobii-web.xml file, then restart Tomcat and you're all set.
+AUTH_TYPE="TEST"
+#The LDAP distinguised name
+LDAP_DN="uid={0}"
+#The LDAP URL
+LDAP_URL="ldaps://cbsumgs1.tc.cornell.edu/ou=people,dc=cbsu1,dc=net"
+#The LDAP Bind User
+LDAP_BIND_USER="gadm"
+#The LDAP Bind User's password
+LDAP_BIND_PASSWORD="g0b11Admin"
+#The LDAP background user -- the webservices use this to query for valid users, etc
+LDAP_BACKGROUND_USER="gadm"
+#The LDAP backround user's password
+LDAP_BACKGROUND_PASSWORD="g0b11Admin"
+#The mail host. This can be your local mail host or a Gmail SMTP server.
+MAIL_HOST="smtp.gmail.com"
+#The mail server's port.
+MAIL_PORT=587
+#The mail user account.
+MAIL_USERNAME="cassavabase.gobii@gmail.com"
+#The mail user account's password.
+MAIL_PASSWORD="g0bii@bti"
+#The type of mail server, Gmail defaults to SMTP.
+MAIL_TYPE="SMTP"
+#The mail server's hash
+MAIL_HASH="na"
+#The name of the first crop. This should match what is in the docker hub images.
+CROP1="dev"
+#The web host's domain name or IP address
+WEB_HOST="132.236.81.216"
+#The web host's web server port. This should match what is in the *_main.parameter file.
+WEB_PORT="8081"
+#The first crop's context path (the web application). This should match what is in the docker hub images.
+CROP1_CONTEXT_PATH="/gobii-dev"
+#The database host's domain name or IP address
+DB_HOST="132.236.81.216"
+#The database host's postgres port. This should match what is in the *_main.parameter file.
+DB_PORT="5433"
+#The main GOBII database user
+DB_USERNAME="appuser"
+#The main GOBII database user's password. If you want to change this password, you can do so once the whole automated deployment finish successfully. But make sure after changing it in postgres, change the corresponding tag in the gobii-web.xml file.
+DB_PASS="g0b11isw3s0m3"
+#The database name of the first crop. This should match what is in the docker hub images.
+DB_NAME_CROP1="gobii_dev"
+#KDCompute related params used by gobiiconfig jar
+#KDcompute host
+KDC_HOST="132.236.81.216"
+#KDcompute port
+KDC_PORT="8083"
+#kdcompute application context on server
+KDC_CONTEXT_PATH="kdcompute"
+#KDcompute job start param
+KDC_JOB_START="qcStart"
+#KDcompute job status param
+KDC_JOB_STATUS="qcStatus"
+#KDcompute job downloand
+KDC_JOB_DOWNLOAD="qcDownload"
+#Seconds to wait between status checks
+KDC_JOB_CHECK_STATUS="60"
+#Minutes until job is hung
+KDC_JOB_FAIL_THRESHOLD="2880"
+#KDcompute purge the jobs
+KDC_PURGE="qcPurge"
+#KDcompute is active (false|true) for GOBII 
+KDC_ACTIVE="true"
